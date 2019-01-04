@@ -1,1 +1,0 @@
-import{f as react_1,g as react_2}from"./chunk-55f5c268.js";class Toggle extends react_1{constructor(e){super(e),this.handleClick=(()=>{this.setState(e=>({isToggleOn:!e.isToggleOn}))}),this.state={isToggleOn:!0}}render(){return react_2("button",{onClick:this.handleClick},this.state.isToggleOn?"ON":"OFF")}}export default Toggle;export{Toggle};

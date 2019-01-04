@@ -1,0 +1,1 @@
+"use strict";System.register(["./chunk-670a1810.js"],function(t,n){var e,u;return{setters:[function(t){e=t.f,u=t.h}],execute:function(){t("default",function(){var t=e(!0),n=t[0],r=t[1];return u("button",{onClick:function(){return r(!n)}},n?"ON":"OFF")})}}});
