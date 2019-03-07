@@ -1,1 +1,0 @@
-"use strict";System.register(["./chunk-9cae40ed.js"],function(t,n){var e,u;return{setters:[function(t){e=t.k,u=t.b}],execute:function(){t("default",function(){var t=e(!0),n=t[0],r=t[1];return u("button",{onClick:function(){return r(!n)}},n?"ON":"OFF")})}}});
