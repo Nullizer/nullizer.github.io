@@ -1,1 +1,0 @@
-System.register(["./chunk-c0c865ed.js"],function(t,n){"use strict";var e,c;return{setters:[function(t){e=t.k,c=t.b}],execute:function(){t("default",function(){const[t,n]=e(!0);return c("button",{onClick:()=>n(!t)},t?"ON":"OFF")})}}});
