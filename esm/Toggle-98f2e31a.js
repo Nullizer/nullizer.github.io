@@ -1,0 +1,1 @@
+import{i as react_11,a as react_2}from"./chunk-748619db.js";function Toggle(){const[t,e]=react_11(!0);return react_2("button",{onClick:()=>e(!t)},t?"ON":"OFF")}export default Toggle;

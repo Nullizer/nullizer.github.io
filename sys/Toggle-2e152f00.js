@@ -1,1 +1,0 @@
-System.register(["./chunk-2f3282da.js"],function(t){"use strict";var n,e;return{setters:[function(t){n=t.i,e=t.a}],execute:function(){t("default",function(){const[t,u]=n(!0);return e("button",{onClick:()=>u(!t)},t?"ON":"OFF")})}}});
