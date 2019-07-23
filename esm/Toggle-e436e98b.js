@@ -1,1 +1,0 @@
-import{i as react_11,a as react_2}from"./chunk-cadd86fc.js";function Toggle(){const[t,c]=react_11(!0);return react_2("button",{onClick:()=>c(!t)},t?"ON":"OFF")}export default Toggle;

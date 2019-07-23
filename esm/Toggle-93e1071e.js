@@ -1,0 +1,1 @@
+import{e as react_11,a as react_2}from"./vendor-ce52ab95.js";function Toggle(){const[e,t]=react_11(!0);return react_2("button",{onClick:()=>t(!e)},e?"ON":"OFF")}export default Toggle;
