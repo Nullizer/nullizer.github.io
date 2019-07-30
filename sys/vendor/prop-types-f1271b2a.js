@@ -1,1 +1,1 @@
-System.register([],function(){"use strict";return{execute:function(){}}});
+System.register([],function(){return{execute:function(){}}});

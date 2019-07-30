@@ -1,1 +1,1 @@
-System.register(["./vendor/react-ca156293.js","./vendor/object-assign-05287392.js"],function(t){"use strict";var n,e;return{setters:[function(t){n=t.h,e=t.a},function(){}],execute:function(){t("default",function(){const[t,c]=n(!0);return e("button",{onClick:()=>c(!t)},t?"ON":"OFF")})}}});
+System.register(["./vendor/react-ca156293.js","./vendor/object-assign-05287392.js"],function(n){var t,e;return{setters:[function(n){t=n.h,e=n.a},function(){}],execute:function(){n("default",function(){const[n,c]=t(!0);return e("button",{onClick:()=>c(!n)},n?"ON":"OFF")})}}});

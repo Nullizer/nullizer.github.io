@@ -1,1 +1,1 @@
-function _inheritsLoose(o,t){o.prototype=Object.create(t.prototype),o.prototype.constructor=o,o.__proto__=t}var inheritsLoose=_inheritsLoose;export{inheritsLoose as _};
+var t=function(t,o){t.prototype=Object.create(o.prototype),t.prototype.constructor=t,t.__proto__=o};export{t as _};
