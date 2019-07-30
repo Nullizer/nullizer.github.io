@@ -1,1 +1,0 @@
-"use strict";System.register(["./vendor-96981533.js"],function(t){var n,e;return{setters:[function(t){n=t.e,e=t.a}],execute:function(){t("default",function(){var t=n(!0),r=t[0],u=t[1];return e("button",{onClick:function(){return u(!r)}},r?"ON":"OFF")})}}});

@@ -1,0 +1,1 @@
+"use strict";System.register([],function(t){return{execute:function(){t("_",function(t,e){t.prototype=Object.create(e.prototype),t.prototype.constructor=t,t.__proto__=e})}}});
