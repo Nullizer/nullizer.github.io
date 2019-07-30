@@ -1,0 +1,1 @@
+var t=function(t,o){t.prototype=Object.create(o.prototype),t.prototype.constructor=t,t.__proto__=o};export{t as _};

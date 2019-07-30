@@ -1,1 +1,0 @@
-System.register(["./vendor/react-ca156293.js","./vendor/object-assign-05287392.js"],function(n){var t,e;return{setters:[function(n){t=n.h,e=n.a},function(){}],execute:function(){n("default",function(){var n=t(!0),r=n[0],u=n[1];return e("button",{onClick:function(){return u(!r)}},r?"ON":"OFF")})}}});
