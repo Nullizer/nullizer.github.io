@@ -1,0 +1,1 @@
+import{h as o,a as t}from"./vendor/react-32113167.js";import"./vendor/object-assign-dcd1138b.js";export default function(){const[n,r]=o(!0);return t("button",{onClick:()=>r(!n)},n?"ON":"OFF")}
