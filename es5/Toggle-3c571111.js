@@ -1,1 +1,0 @@
-import{g as r,a as t}from"./vendor/react-5af70a17.js";import"./vendor/object-assign-36fe2d91.js";export default function(){var n=r(!0),o=n[0],a=n[1];return t("button",{onClick:function(){return a(!o)}},o?"ON":"OFF")}
