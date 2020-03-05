@@ -1097,7 +1097,7 @@ output += runtime.suppressValue(runtime.memberLookup((runtime.memberLookup((t_4)
 output += "</a>\n              </h3>\n              <p class=\"text-500 gap-top-300 weight-mid\">\n                <time datetime=\"";
 output += runtime.suppressValue(env.getFilter("w3DateFilter").call(context, runtime.memberLookup((t_4),"date")), env.opts.autoescape);
 output += "\">";
-output += runtime.suppressValue(env.getFilter("dateFilter").call(context, runtime.memberLookup((t_4),"date")), env.opts.autoescape);
+output += runtime.suppressValue(env.getFilter("toLocaleDateString").call(context, runtime.memberLookup((t_4),"date")), env.opts.autoescape);
 output += "</time>\n              </p>\n            </li>\n          ";
 ;
 }
