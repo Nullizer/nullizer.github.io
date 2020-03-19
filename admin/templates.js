@@ -297,7 +297,7 @@ output += "\n  ";
 (parentTemplate ? function(e, c, f, r, cb) { cb(""); } : context.getBlock("foot"))(env, context, frame, runtime, function(t_22,t_21) {
 if(t_22) { cb(t_22); return; }
 output += t_21;
-output += "\n  <script type=\"module\" src=\"/js/components/theme-toggle.js\" async defer></script>\n  <script>\n    if ('serviceWorker' in navigator) {\n      window.addEventListener('load', () => {\n        navigator.serviceWorker.register('/service-worker.js');\n      });\n    }\n  </script>\n  <script src=\"https://identity.netlify.com/v1/netlify-identity-widget.js\" async defer></script>\n</body>\n</html>\n";
+output += "\n  <script type=\"module\" src=\"/js/components/theme-toggle.js\" async defer></script>\n  <script>\n    if ('serviceWorker' in navigator) {\n      window.addEventListener('load', () => {\n        navigator.serviceWorker.register('/service-worker.js');\n      });\n    }\n  </script>\n</body>\n</html>\n";
 if(parentTemplate) {
 parentTemplate.rootRenderFunc(env, context, frame, runtime, cb);
 } else {
