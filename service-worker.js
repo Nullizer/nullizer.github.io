@@ -1,4 +1,4 @@
-const VERSION = 'dd32-f41f-a342';
+const VERSION = '8df6-e758-9af9';
 const CACHE_KEYS = {
   PRE_CACHE: `precache-${VERSION}`,
   RUNTIME: `runtime-${VERSION}`
@@ -9,7 +9,9 @@ const EXCLUDED_URLS = [
   'admin',
   '.netlify',
   'https://identity.netlify.com/v1/netlify-identity-widget.js',
-  'https://unpkg.com/netlify-cms@^2.9.3/dist/netlify-cms.js'
+  'https://unpkg.com/netlify-cms@^2.9.3/dist/netlify-cms.js',
+  '.flv', '.mpd', '.mp4', '.m3u8',
+  'naive-live-loader',
 ];
 
 // URLS that we want to be cached when the worker is installed
