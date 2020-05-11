@@ -7072,9 +7072,8 @@ var previewUtil = (function (exports) {
 
     if (name.charCodeAt(0) === 0x23/* # */ && DIGITAL_ENTITY_TEST_RE.test(name)) {
       code = name[1].toLowerCase() === 'x' ?
-        parseInt(name.slice(2), 16)
-      :
-        parseInt(name.slice(1), 10);
+        parseInt(name.slice(2), 16) : parseInt(name.slice(1), 10);
+
       if (isValidEntityCode(code)) {
         return fromCodePoint(code);
       }
@@ -7225,10 +7224,53 @@ var previewUtil = (function (exports) {
   // Hepler to unify [reference labels].
   //
   function normalizeReference(str) {
-    // use .toUpperCase() instead of .toLowerCase()
-    // here to avoid a conflict with Object.prototype
-    // members (most notably, `__proto__`)
-    return str.trim().replace(/\s+/g, ' ').toUpperCase();
+    // Trim and collapse whitespace
+    //
+    str = str.trim().replace(/\s+/g, ' ');
+
+    // In node v10 'ẞ'.toLowerCase() === 'Ṿ', which is presumed to be a bug
+    // fixed in v12 (couldn't find any details).
+    //
+    // So treat this one as a special case
+    // (remove this when node v10 is no longer supported).
+    //
+    if ('ẞ'.toLowerCase() === 'Ṿ') {
+      str = str.replace(/ẞ/g, 'ß');
+    }
+
+    // .toLowerCase().toUpperCase() should get rid of all differences
+    // between letter variants.
+    //
+    // Simple .toLowerCase() doesn't normalize 125 code points correctly,
+    // and .toUpperCase doesn't normalize 6 of them (list of exceptions:
+    // İ, ϴ, ẞ, Ω, K, Å - those are already uppercased, but have differently
+    // uppercased versions).
+    //
+    // Here's an example showing how it happens. Lets take greek letter omega:
+    // uppercase U+0398 (Θ), U+03f4 (ϴ) and lowercase U+03b8 (θ), U+03d1 (ϑ)
+    //
+    // Unicode entries:
+    // 0398;GREEK CAPITAL LETTER THETA;Lu;0;L;;;;;N;;;;03B8;
+    // 03B8;GREEK SMALL LETTER THETA;Ll;0;L;;;;;N;;;0398;;0398
+    // 03D1;GREEK THETA SYMBOL;Ll;0;L;<compat> 03B8;;;;N;GREEK SMALL LETTER SCRIPT THETA;;0398;;0398
+    // 03F4;GREEK CAPITAL THETA SYMBOL;Lu;0;L;<compat> 0398;;;;N;;;;03B8;
+    //
+    // Case-insensitive comparison should treat all of them as equivalent.
+    //
+    // But .toLowerCase() doesn't change ϑ (it's already lowercase),
+    // and .toUpperCase() doesn't change ϴ (already uppercase).
+    //
+    // Applying first lower then upper case normalizes any character:
+    // '\u0398\u03f4\u03b8\u03d1'.toLowerCase().toUpperCase() === '\u0398\u0398\u0398\u0398'
+    //
+    // Note: this is equivalent to unicode case folding; unicode normalization
+    // is a different step that is not required here.
+    //
+    // Final result should be uppercased, because it's later stored in an object
+    // (this avoid a conflict with Object.prototype members,
+    // most notably, `__proto__`)
+    //
+    return str.toLowerCase().toUpperCase();
   }
 
   ////////////////////////////////////////////////////////////////////////////////
@@ -7319,7 +7361,6 @@ var previewUtil = (function (exports) {
     return labelEnd;
   };
 
-  var isSpace     = utils.isSpace;
   var unescapeAll = utils.unescapeAll;
 
 
@@ -7338,7 +7379,7 @@ var previewUtil = (function (exports) {
       pos++;
       while (pos < max) {
         code = str.charCodeAt(pos);
-        if (code === 0x0A /* \n */ || isSpace(code)) { return result; }
+        if (code === 0x0A /* \n */) { return result; }
         if (code === 0x3E /* > */) {
           result.pos = pos + 1;
           result.str = unescapeAll(str.slice(start + 1, pos));
@@ -8135,11 +8176,12 @@ var previewUtil = (function (exports) {
   // Normalize input string
 
 
-  var NEWLINES_RE  = /\r[\n\u0085]?|[\u2424\u2028\u0085]/g;
-  var NULL_RE      = /\u0000/g;
+  // https://spec.commonmark.org/0.29/#line-ending
+  var NEWLINES_RE  = /\r\n?|\n/g;
+  var NULL_RE      = /\0/g;
 
 
-  var normalize = function inline(state) {
+  var normalize = function normalize(state) {
     var str;
 
     // Normalize newlines
@@ -8304,7 +8346,7 @@ var previewUtil = (function (exports) {
     }
   };
 
-  // Simple typographyc replacements
+  // Simple typographic replacements
 
   // TODO:
   // - fractionals 1/2, 1/4, 3/4 -> ½, ¼, ¾
@@ -8357,16 +8399,16 @@ var previewUtil = (function (exports) {
       if (token.type === 'text' && !inside_autolink) {
         if (RARE_RE.test(token.content)) {
           token.content = token.content
-                      .replace(/\+-/g, '±')
-                      // .., ..., ....... -> …
-                      // but ?..... & !..... -> ?.. & !..
-                      .replace(/\.{2,}/g, '…').replace(/([?!])…/g, '$1..')
-                      .replace(/([?!]){4,}/g, '$1$1$1').replace(/,{2,}/g, ',')
-                      // em-dash
-                      .replace(/(^|[^-])---([^-]|$)/mg, '$1\u2014$2')
-                      // en-dash
-                      .replace(/(^|\s)--(\s|$)/mg, '$1\u2013$2')
-                      .replace(/(^|[^-\s])--([^-\s]|$)/mg, '$1\u2013$2');
+            .replace(/\+-/g, '±')
+            // .., ..., ....... -> …
+            // but ?..... & !..... -> ?.. & !..
+            .replace(/\.{2,}/g, '…').replace(/([?!])…/g, '$1..')
+            .replace(/([?!]){4,}/g, '$1$1$1').replace(/,{2,}/g, ',')
+            // em-dash
+            .replace(/(^|[^-])---([^-]|$)/mg, '$1\u2014$2')
+            // en-dash
+            .replace(/(^|\s)--(\s|$)/mg, '$1\u2013$2')
+            .replace(/(^|[^-\s])--([^-\s]|$)/mg, '$1\u2013$2');
         }
       }
 
@@ -8849,7 +8891,7 @@ var previewUtil = (function (exports) {
 
   var parser_core = Core;
 
-  var isSpace$1 = utils.isSpace;
+  var isSpace = utils.isSpace;
 
 
   function getLine(state, line) {
@@ -8938,7 +8980,7 @@ var previewUtil = (function (exports) {
     while (pos < state.eMarks[nextLine]) {
       ch = state.src.charCodeAt(pos);
 
-      if (ch !== 0x7C/* | */ && ch !== 0x2D/* - */ && ch !== 0x3A/* : */ && !isSpace$1(ch)) { return false; }
+      if (ch !== 0x7C/* | */ && ch !== 0x2D/* - */ && ch !== 0x3A/* : */ && !isSpace(ch)) { return false; }
 
       pos++;
     }
@@ -9106,7 +9148,11 @@ var previewUtil = (function (exports) {
     markup = state.src.slice(mem, pos);
     params = state.src.slice(pos, max);
 
-    if (params.indexOf(String.fromCharCode(marker)) >= 0) { return false; }
+    if (marker === 0x60 /* ` */) {
+      if (params.indexOf(String.fromCharCode(marker)) >= 0) {
+        return false;
+      }
+    }
 
     // Since start is found, we can report success here in validation mode
     if (silent) { return true; }
@@ -9168,7 +9214,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$2 = utils.isSpace;
+  var isSpace$1 = utils.isSpace;
 
 
   var blockquote = function blockquote(state, startLine, endLine, silent) {
@@ -9244,7 +9290,7 @@ var previewUtil = (function (exports) {
     while (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (isSpace$2(ch)) {
+      if (isSpace$1(ch)) {
         if (ch === 0x09) {
           offset += 4 - (offset + state.bsCount[startLine] + (adjustTab ? 1 : 0)) % 4;
         } else {
@@ -9352,7 +9398,7 @@ var previewUtil = (function (exports) {
         while (pos < max) {
           ch = state.src.charCodeAt(pos);
 
-          if (isSpace$2(ch)) {
+          if (isSpace$1(ch)) {
             if (ch === 0x09) {
               offset += 4 - (offset + state.bsCount[nextLine] + (adjustTab ? 1 : 0)) % 4;
             } else {
@@ -9450,7 +9496,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$3 = utils.isSpace;
+  var isSpace$2 = utils.isSpace;
 
 
   var hr = function hr(state, startLine, endLine, silent) {
@@ -9475,7 +9521,7 @@ var previewUtil = (function (exports) {
     cnt = 1;
     while (pos < max) {
       ch = state.src.charCodeAt(pos++);
-      if (ch !== marker && !isSpace$3(ch)) { return false; }
+      if (ch !== marker && !isSpace$2(ch)) { return false; }
       if (ch === marker) { cnt++; }
     }
 
@@ -9492,7 +9538,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$4 = utils.isSpace;
+  var isSpace$3 = utils.isSpace;
 
 
   // Search `[-+*][\n ]`, returns next pos after marker on success
@@ -9514,7 +9560,7 @@ var previewUtil = (function (exports) {
     if (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (!isSpace$4(ch)) {
+      if (!isSpace$3(ch)) {
         // " -test " - is not a list item
         return -1;
       }
@@ -9565,7 +9611,7 @@ var previewUtil = (function (exports) {
     if (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (!isSpace$4(ch)) {
+      if (!isSpace$3(ch)) {
         // " 1.test " - is not a list item
         return -1;
       }
@@ -9604,9 +9650,9 @@ var previewUtil = (function (exports) {
         max,
         nextLine,
         offset,
-        oldIndent,
-        oldLIndent,
+        oldListIndent,
         oldParentType,
+        oldSCount,
         oldTShift,
         oldTight,
         pos,
@@ -9621,6 +9667,18 @@ var previewUtil = (function (exports) {
 
     // if it's indented more than 3 spaces, it should be a code block
     if (state.sCount[startLine] - state.blkIndent >= 4) { return false; }
+
+    // Special case:
+    //  - item 1
+    //   - item 2
+    //    - item 3
+    //     - item 4
+    //      - this one is a paragraph continuation
+    if (state.listIndent >= 0 &&
+        state.sCount[startLine] - state.listIndent >= 4 &&
+        state.sCount[startLine] < state.blkIndent) {
+      return false;
+    }
 
     // limit conditions when list can interrupt
     // a paragraph (validation mode only)
@@ -9733,11 +9791,19 @@ var previewUtil = (function (exports) {
       token.markup = String.fromCharCode(markerCharCode);
       token.map    = itemLines = [ startLine, 0 ];
 
-      oldIndent = state.blkIndent;
+      // change current state, then restore it after parser subcall
       oldTight = state.tight;
       oldTShift = state.tShift[startLine];
-      oldLIndent = state.sCount[startLine];
+      oldSCount = state.sCount[startLine];
+
+      //  - example list
+      // ^ listIndent position will be here
+      //   ^ blkIndent position will be here
+      //
+      oldListIndent = state.listIndent;
+      state.listIndent = state.blkIndent;
       state.blkIndent = indent;
+
       state.tight = true;
       state.tShift[startLine] = contentStart - state.bMarks[startLine];
       state.sCount[startLine] = offset;
@@ -9763,9 +9829,10 @@ var previewUtil = (function (exports) {
       // but we should filter last element, because it means list finish
       prevEmptyEnd = (state.line - startLine) > 1 && state.isEmpty(state.line - 1);
 
-      state.blkIndent = oldIndent;
+      state.blkIndent = state.listIndent;
+      state.listIndent = oldListIndent;
       state.tShift[startLine] = oldTShift;
-      state.sCount[startLine] = oldLIndent;
+      state.sCount[startLine] = oldSCount;
       state.tight = oldTight;
 
       token        = state.push('list_item_close', 'li', -1);
@@ -9781,6 +9848,9 @@ var previewUtil = (function (exports) {
       // Try to check if list is terminated or continued.
       //
       if (state.sCount[nextLine] < state.blkIndent) { break; }
+
+      // if it's indented more than 3 spaces, it should be a code block
+      if (state.sCount[startLine] - state.blkIndent >= 4) { break; }
 
       // fail if terminating block found
       terminate = false;
@@ -9826,7 +9896,7 @@ var previewUtil = (function (exports) {
   };
 
   var normalizeReference   = utils.normalizeReference;
-  var isSpace$5              = utils.isSpace;
+  var isSpace$4              = utils.isSpace;
 
 
   var reference = function reference(state, startLine, _endLine, silent) {
@@ -9922,7 +9992,7 @@ var previewUtil = (function (exports) {
       ch = str.charCodeAt(pos);
       if (ch === 0x0A) {
         lines++;
-      } else if (isSpace$5(ch)) ; else {
+      } else if (isSpace$4(ch)) ; else {
         break;
       }
     }
@@ -9949,7 +10019,7 @@ var previewUtil = (function (exports) {
       ch = str.charCodeAt(pos);
       if (ch === 0x0A) {
         lines++;
-      } else if (isSpace$5(ch)) ; else {
+      } else if (isSpace$4(ch)) ; else {
         break;
       }
     }
@@ -9970,7 +10040,7 @@ var previewUtil = (function (exports) {
     // skip trailing spaces until the rest of the line
     while (pos < max) {
       ch = str.charCodeAt(pos);
-      if (!isSpace$5(ch)) { break; }
+      if (!isSpace$4(ch)) { break; }
       pos++;
     }
 
@@ -9983,7 +10053,7 @@ var previewUtil = (function (exports) {
         lines = destEndLineNo;
         while (pos < max) {
           ch = str.charCodeAt(pos);
-          if (!isSpace$5(ch)) { break; }
+          if (!isSpace$4(ch)) { break; }
           pos++;
         }
       }
@@ -10017,7 +10087,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$6 = utils.isSpace;
+  var isSpace$5 = utils.isSpace;
 
 
   var heading = function heading(state, startLine, endLine, silent) {
@@ -10040,7 +10110,7 @@ var previewUtil = (function (exports) {
       ch = state.src.charCodeAt(++pos);
     }
 
-    if (level > 6 || (pos < max && !isSpace$6(ch))) { return false; }
+    if (level > 6 || (pos < max && !isSpace$5(ch))) { return false; }
 
     if (silent) { return true; }
 
@@ -10048,7 +10118,7 @@ var previewUtil = (function (exports) {
 
     max = state.skipSpacesBack(max, pos);
     tmp = state.skipCharsBack(max, 0x23, pos); // #
-    if (tmp > pos && isSpace$6(state.src.charCodeAt(tmp - 1))) {
+    if (tmp > pos && isSpace$5(state.src.charCodeAt(tmp - 1))) {
       max = tmp;
     }
 
@@ -10372,7 +10442,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$7 = utils.isSpace;
+  var isSpace$6 = utils.isSpace;
 
 
   function StateBlock(src, md, env, tokens) {
@@ -10409,12 +10479,13 @@ var previewUtil = (function (exports) {
     this.bsCount = [];
 
     // block parser variables
-    this.blkIndent  = 0; // required block content indent
-                         // (for example, if we are in list)
+    this.blkIndent  = 0; // required block content indent (for example, if we are
+                         // inside a list, it would be positioned after list marker)
     this.line       = 0; // line index in src
     this.lineMax    = 0; // lines count
     this.tight      = false;  // loose/tight mode for lists
     this.ddIndent   = -1; // indent of the current dd block (-1 if there isn't any)
+    this.listIndent = -1; // indent of the current list block (-1 if there isn't any)
 
     // can be 'blockquote', 'list', 'root', 'paragraph' or 'reference'
     // used in lists to determine if they interrupt a paragraph
@@ -10434,7 +10505,7 @@ var previewUtil = (function (exports) {
       ch = s.charCodeAt(pos);
 
       if (!indent_found) {
-        if (isSpace$7(ch)) {
+        if (isSpace$6(ch)) {
           indent++;
 
           if (ch === 0x09) {
@@ -10479,9 +10550,9 @@ var previewUtil = (function (exports) {
     var token$1 = new token(type, tag, nesting);
     token$1.block = true;
 
-    if (nesting < 0) { this.level--; }
+    if (nesting < 0) this.level--; // closing tag
     token$1.level = this.level;
-    if (nesting > 0) { this.level++; }
+    if (nesting > 0) this.level++; // opening tag
 
     this.tokens.push(token$1);
     return token$1;
@@ -10506,7 +10577,7 @@ var previewUtil = (function (exports) {
 
     for (var max = this.src.length; pos < max; pos++) {
       ch = this.src.charCodeAt(pos);
-      if (!isSpace$7(ch)) { break; }
+      if (!isSpace$6(ch)) { break; }
     }
     return pos;
   };
@@ -10516,7 +10587,7 @@ var previewUtil = (function (exports) {
     if (pos <= min) { return pos; }
 
     while (pos > min) {
-      if (!isSpace$7(this.src.charCodeAt(--pos))) { return pos + 1; }
+      if (!isSpace$6(this.src.charCodeAt(--pos))) { return pos + 1; }
     }
     return pos;
   };
@@ -10564,7 +10635,7 @@ var previewUtil = (function (exports) {
       while (first < last && lineIndent < indent) {
         ch = this.src.charCodeAt(first);
 
-        if (isSpace$7(ch)) {
+        if (isSpace$6(ch)) {
           if (ch === 0x09) {
             lineIndent += 4 - (lineIndent + this.bsCount[line]) % 4;
           } else {
@@ -10767,7 +10838,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$8 = utils.isSpace;
+  var isSpace$7 = utils.isSpace;
 
 
   var newline = function newline(state, silent) {
@@ -10800,13 +10871,13 @@ var previewUtil = (function (exports) {
     pos++;
 
     // skip heading spaces for next line
-    while (pos < max && isSpace$8(state.src.charCodeAt(pos))) { pos++; }
+    while (pos < max && isSpace$7(state.src.charCodeAt(pos))) { pos++; }
 
     state.pos = pos;
     return true;
   };
 
-  var isSpace$9 = utils.isSpace;
+  var isSpace$8 = utils.isSpace;
 
   var ESCAPED = [];
 
@@ -10841,7 +10912,7 @@ var previewUtil = (function (exports) {
         // skip leading whitespaces from next line
         while (pos < max) {
           ch = state.src.charCodeAt(pos);
-          if (!isSpace$9(ch)) { break; }
+          if (!isSpace$8(ch)) { break; }
           pos++;
         }
 
@@ -10884,8 +10955,8 @@ var previewUtil = (function (exports) {
           token         = state.push('code_inline', 'code', 0);
           token.markup  = marker;
           token.content = state.src.slice(pos, matchStart)
-                                   .replace(/[ \n]+/g, ' ')
-                                   .trim();
+            .replace(/\n/g, ' ')
+            .replace(/^ (.+) $/, '$1');
         }
         state.pos = matchEnd;
         return true;
@@ -10929,9 +11000,9 @@ var previewUtil = (function (exports) {
 
       state.delimiters.push({
         marker: marker,
+        length: 0, // disable "rule of 3" length checks meant for emphasis
         jump:   i,
         token:  state.tokens.length - 1,
-        level:  state.level,
         end:    -1,
         open:   scanned.can_open,
         close:  scanned.can_close
@@ -10944,16 +11015,13 @@ var previewUtil = (function (exports) {
   };
 
 
-  // Walk through delimiter list and replace text tokens with tags
-  //
-  var postProcess = function strikethrough(state) {
+  function postProcess(state, delimiters) {
     var i, j,
         startDelim,
         endDelim,
         token,
         loneMarkers = [],
-        delimiters = state.delimiters,
-        max = state.delimiters.length;
+        max = delimiters.length;
 
     for (i = 0; i < max; i++) {
       startDelim = delimiters[i];
@@ -11011,11 +11079,28 @@ var previewUtil = (function (exports) {
         state.tokens[i] = token;
       }
     }
+  }
+
+
+  // Walk through delimiter list and replace text tokens with tags
+  //
+  var postProcess_1 = function strikethrough(state) {
+    var curr,
+        tokens_meta = state.tokens_meta,
+        max = state.tokens_meta.length;
+
+    postProcess(state, state.delimiters);
+
+    for (curr = 0; curr < max; curr++) {
+      if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
+        postProcess(state, tokens_meta[curr].delimiters);
+      }
+    }
   };
 
   var strikethrough = {
   	tokenize: tokenize,
-  	postProcess: postProcess
+  	postProcess: postProcess_1
   };
 
   // Process *this* and _that_
@@ -11060,10 +11145,6 @@ var previewUtil = (function (exports) {
         //
         token:  state.tokens.length - 1,
 
-        // Token level.
-        //
-        level:  state.level,
-
         // If this delimiter is matched as a valid opener, `end` will be
         // equal to its position, otherwise it's `-1`.
         //
@@ -11083,17 +11164,14 @@ var previewUtil = (function (exports) {
   };
 
 
-  // Walk through delimiter list and replace text tokens with tags
-  //
-  var postProcess$1 = function emphasis(state) {
+  function postProcess$1(state, delimiters) {
     var i,
         startDelim,
         endDelim,
         token,
         ch,
         isStrong,
-        delimiters = state.delimiters,
-        max = state.delimiters.length;
+        max = delimiters.length;
 
     for (i = max - 1; i >= 0; i--) {
       startDelim = delimiters[i];
@@ -11142,15 +11220,32 @@ var previewUtil = (function (exports) {
         i--;
       }
     }
+  }
+
+
+  // Walk through delimiter list and replace text tokens with tags
+  //
+  var postProcess_1$1 = function emphasis(state) {
+    var curr,
+        tokens_meta = state.tokens_meta,
+        max = state.tokens_meta.length;
+
+    postProcess$1(state, state.delimiters);
+
+    for (curr = 0; curr < max; curr++) {
+      if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
+        postProcess$1(state, tokens_meta[curr].delimiters);
+      }
+    }
   };
 
   var emphasis = {
   	tokenize: tokenize$1,
-  	postProcess: postProcess$1
+  	postProcess: postProcess_1$1
   };
 
   var normalizeReference$1   = utils.normalizeReference;
-  var isSpace$a              = utils.isSpace;
+  var isSpace$9              = utils.isSpace;
 
 
   var link = function link(state, silent) {
@@ -11192,7 +11287,7 @@ var previewUtil = (function (exports) {
       pos++;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$a(code) && code !== 0x0A) { break; }
+        if (!isSpace$9(code) && code !== 0x0A) { break; }
       }
       if (pos >= max) { return false; }
 
@@ -11214,7 +11309,7 @@ var previewUtil = (function (exports) {
       start = pos;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$a(code) && code !== 0x0A) { break; }
+        if (!isSpace$9(code) && code !== 0x0A) { break; }
       }
 
       // [link](  <href>  "title"  )
@@ -11228,7 +11323,7 @@ var previewUtil = (function (exports) {
         //                         ^^ skipping these spaces
         for (; pos < max; pos++) {
           code = state.src.charCodeAt(pos);
-          if (!isSpace$a(code) && code !== 0x0A) { break; }
+          if (!isSpace$9(code) && code !== 0x0A) { break; }
         }
       } else {
         title = '';
@@ -11297,7 +11392,7 @@ var previewUtil = (function (exports) {
   };
 
   var normalizeReference$2   = utils.normalizeReference;
-  var isSpace$b              = utils.isSpace;
+  var isSpace$a              = utils.isSpace;
 
 
   var image$1 = function image(state, silent) {
@@ -11338,7 +11433,7 @@ var previewUtil = (function (exports) {
       pos++;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$b(code) && code !== 0x0A) { break; }
+        if (!isSpace$a(code) && code !== 0x0A) { break; }
       }
       if (pos >= max) { return false; }
 
@@ -11360,7 +11455,7 @@ var previewUtil = (function (exports) {
       start = pos;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$b(code) && code !== 0x0A) { break; }
+        if (!isSpace$a(code) && code !== 0x0A) { break; }
       }
 
       // [link](  <href>  "title"  )
@@ -11374,7 +11469,7 @@ var previewUtil = (function (exports) {
         //                         ^^ skipping these spaces
         for (; pos < max; pos++) {
           code = state.src.charCodeAt(pos);
-          if (!isSpace$b(code) && code !== 0x0A) { break; }
+          if (!isSpace$a(code) && code !== 0x0A) { break; }
         }
       } else {
         title = '';
@@ -11564,7 +11659,7 @@ var previewUtil = (function (exports) {
   var fromCodePoint     = utils.fromCodePoint;
 
 
-  var DIGITAL_RE = /^&#((?:x[a-f0-9]{1,8}|[0-9]{1,8}));/i;
+  var DIGITAL_RE = /^&#((?:x[a-f0-9]{1,6}|[0-9]{1,7}));/i;
   var NAMED_RE   = /^&([a-z][a-z0-9]{1,31});/i;
 
 
@@ -11606,47 +11701,111 @@ var previewUtil = (function (exports) {
   // For each opening emphasis-like marker find a matching closing one
 
 
-  var balance_pairs = function link_pairs(state) {
-    var i, j, lastDelim, currDelim,
-        delimiters = state.delimiters,
-        max = state.delimiters.length;
+  function processDelimiters(state, delimiters) {
+    var closerIdx, openerIdx, closer, opener, minOpenerIdx, newMinOpenerIdx,
+        isOddMatch, lastJump,
+        openersBottom = {},
+        max = delimiters.length;
 
-    for (i = 0; i < max; i++) {
-      lastDelim = delimiters[i];
+    for (closerIdx = 0; closerIdx < max; closerIdx++) {
+      closer = delimiters[closerIdx];
 
-      if (!lastDelim.close) { continue; }
+      // Length is only used for emphasis-specific "rule of 3",
+      // if it's not defined (in strikethrough or 3rd party plugins),
+      // we can default it to 0 to disable those checks.
+      //
+      closer.length = closer.length || 0;
 
-      j = i - lastDelim.jump - 1;
+      if (!closer.close) continue;
 
-      while (j >= 0) {
-        currDelim = delimiters[j];
+      // Previously calculated lower bounds (previous fails)
+      // for each marker and each delimiter length modulo 3.
+      if (!openersBottom.hasOwnProperty(closer.marker)) {
+        openersBottom[closer.marker] = [ -1, -1, -1 ];
+      }
 
-        if (currDelim.open &&
-            currDelim.marker === lastDelim.marker &&
-            currDelim.end < 0 &&
-            currDelim.level === lastDelim.level) {
+      minOpenerIdx = openersBottom[closer.marker][closer.length % 3];
+      newMinOpenerIdx = -1;
 
-          // typeofs are for backward compatibility with plugins
-          var odd_match = (currDelim.close || lastDelim.open) &&
-                          typeof currDelim.length !== 'undefined' &&
-                          typeof lastDelim.length !== 'undefined' &&
-                          (currDelim.length + lastDelim.length) % 3 === 0;
+      openerIdx = closerIdx - closer.jump - 1;
 
-          if (!odd_match) {
-            lastDelim.jump = i - j;
-            lastDelim.open = false;
-            currDelim.end  = i;
-            currDelim.jump = 0;
+      for (; openerIdx > minOpenerIdx; openerIdx -= opener.jump + 1) {
+        opener = delimiters[openerIdx];
+
+        if (opener.marker !== closer.marker) continue;
+
+        if (newMinOpenerIdx === -1) newMinOpenerIdx = openerIdx;
+
+        if (opener.open &&
+            opener.end < 0 &&
+            opener.level === closer.level) {
+
+          isOddMatch = false;
+
+          // from spec:
+          //
+          // If one of the delimiters can both open and close emphasis, then the
+          // sum of the lengths of the delimiter runs containing the opening and
+          // closing delimiters must not be a multiple of 3 unless both lengths
+          // are multiples of 3.
+          //
+          if (opener.close || closer.open) {
+            if ((opener.length + closer.length) % 3 === 0) {
+              if (opener.length % 3 !== 0 || closer.length % 3 !== 0) {
+                isOddMatch = true;
+              }
+            }
+          }
+
+          if (!isOddMatch) {
+            // If previous delimiter cannot be an opener, we can safely skip
+            // the entire sequence in future checks. This is required to make
+            // sure algorithm has linear complexity (see *_*_*_*_*_... case).
+            //
+            lastJump = openerIdx > 0 && !delimiters[openerIdx - 1].open ?
+              delimiters[openerIdx - 1].jump + 1 :
+              0;
+
+            closer.jump  = closerIdx - openerIdx + lastJump;
+            closer.open  = false;
+            opener.end   = closerIdx;
+            opener.jump  = lastJump;
+            opener.close = false;
+            newMinOpenerIdx = -1;
             break;
           }
         }
+      }
 
-        j -= currDelim.jump + 1;
+      if (newMinOpenerIdx !== -1) {
+        // If match for this delimiter run failed, we want to set lower bound for
+        // future lookups. This is required to make sure algorithm has linear
+        // complexity.
+        //
+        // See details here:
+        // https://github.com/commonmark/cmark/issues/178#issuecomment-270417442
+        //
+        openersBottom[closer.marker][(closer.length || 0) % 3] = newMinOpenerIdx;
+      }
+    }
+  }
+
+
+  var balance_pairs = function link_pairs(state) {
+    var curr,
+        tokens_meta = state.tokens_meta,
+        max = state.tokens_meta.length;
+
+    processDelimiters(state, state.delimiters);
+
+    for (curr = 0; curr < max; curr++) {
+      if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
+        processDelimiters(state, tokens_meta[curr].delimiters);
       }
     }
   };
 
-  // Merge adjacent text nodes into one, and re-calculate all token levels
+  // Clean up tokens after emphasis and strikethrough postprocessing:
 
 
   var text_collapse = function text_collapse(state) {
@@ -11656,9 +11815,11 @@ var previewUtil = (function (exports) {
         max = state.tokens.length;
 
     for (curr = last = 0; curr < max; curr++) {
-      // re-calculate levels
-      level += tokens[curr].nesting;
+      // re-calculate levels after emphasis/strikethrough turns some text nodes
+      // into opening/closing tags
+      if (tokens[curr].nesting < 0) level--; // closing tag
       tokens[curr].level = level;
+      if (tokens[curr].nesting > 0) level++; // opening tag
 
       if (tokens[curr].type === 'text' &&
           curr + 1 < max &&
@@ -11688,6 +11849,7 @@ var previewUtil = (function (exports) {
     this.env = env;
     this.md = md;
     this.tokens = outTokens;
+    this.tokens_meta = Array(outTokens.length);
 
     this.pos = 0;
     this.posMax = this.src.length;
@@ -11695,10 +11857,15 @@ var previewUtil = (function (exports) {
     this.pending = '';
     this.pendingLevel = 0;
 
-    this.cache = {};        // Stores { start: end } pairs. Useful for backtrack
-                            // optimization of pairs parse (emphasis, strikes).
+    // Stores { start: end } pairs. Useful for backtrack
+    // optimization of pairs parse (emphasis, strikes).
+    this.cache = {};
 
-    this.delimiters = [];   // Emphasis-like delimiters
+    // List of emphasis-like delimiters for current tag
+    this.delimiters = [];
+
+    // Stack of delimiter lists for upper level tags
+    this._prev_delimiters = [];
   }
 
 
@@ -11723,13 +11890,27 @@ var previewUtil = (function (exports) {
     }
 
     var token$1 = new token(type, tag, nesting);
+    var token_meta = null;
 
-    if (nesting < 0) { this.level--; }
+    if (nesting < 0) {
+      // closing tag
+      this.level--;
+      this.delimiters = this._prev_delimiters.pop();
+    }
+
     token$1.level = this.level;
-    if (nesting > 0) { this.level++; }
+
+    if (nesting > 0) {
+      // opening tag
+      this.level++;
+      this._prev_delimiters.push(this.delimiters);
+      this.delimiters = [];
+      token_meta = { delimiters: this.delimiters };
+    }
 
     this.pendingLevel = this.level;
     this.tokens.push(token$1);
+    this.tokens_meta.push(token_meta);
     return token$1;
   };
 
