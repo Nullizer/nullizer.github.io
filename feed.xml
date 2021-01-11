@@ -4,7 +4,7 @@
 	<subtitle></subtitle>
 	<link href="https://nullizer.github.io/feed.xml" rel="self"/>
 	<link href="https://nullizer.github.io/"/>
-	<updated>2019-06-19T00:00:00+00:00</updated>
+	<updated>2019-06-19T00:00:00Z</updated>
 	<id>https://nullizer.github.io</id>
 	<author>
   <name>Nullizer</name>
@@ -15,7 +15,7 @@
   <entry>
     <title>A post with code samples</title>
     <link href="https://nullizer.github.io/posts/a-post-with-code-samples/"/>
-    <updated>2019-06-19T00:00:00+00:00</updated>
+    <updated>2019-06-19T00:00:00Z</updated>
     <id>https://nullizer.github.io/posts/a-post-with-code-samples/</id>
     <content type="html"><![CDATA[
       <p>The best way to demo a code post is to display a real life post, so check out
@@ -53,7 +53,7 @@ about a full bleed CSS utility.</p>
   <entry>
     <title>A post with figures and video</title>
     <link href="https://nullizer.github.io/posts/a-post-with-figures-and-video/"/>
-    <updated>2019-06-18T00:00:00+00:00</updated>
+    <updated>2019-06-18T00:00:00Z</updated>
     <id>https://nullizer.github.io/posts/a-post-with-figures-and-video/</id>
     <content type="html"><![CDATA[
       <p>A post to demonstrate how a blog post looks on Hylia. Content is all set in the
