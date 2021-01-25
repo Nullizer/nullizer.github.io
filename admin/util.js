@@ -7300,22 +7300,22 @@ var previewUtil = (function (exports) {
   exports.escapeRE            = escapeRE;
   exports.normalizeReference  = normalizeReference;
   });
-  var utils_1 = utils.lib;
-  var utils_2 = utils.assign;
-  var utils_3 = utils.isString;
-  var utils_4 = utils.has;
-  var utils_5 = utils.unescapeMd;
-  var utils_6 = utils.unescapeAll;
-  var utils_7 = utils.isValidEntityCode;
-  var utils_8 = utils.fromCodePoint;
-  var utils_9 = utils.escapeHtml;
-  var utils_10 = utils.arrayReplaceAt;
-  var utils_11 = utils.isSpace;
-  var utils_12 = utils.isWhiteSpace;
-  var utils_13 = utils.isMdAsciiPunct;
-  var utils_14 = utils.isPunctChar;
-  var utils_15 = utils.escapeRE;
-  var utils_16 = utils.normalizeReference;
+  utils.lib;
+  utils.assign;
+  utils.isString;
+  utils.has;
+  utils.unescapeMd;
+  utils.unescapeAll;
+  utils.isValidEntityCode;
+  utils.fromCodePoint;
+  utils.escapeHtml;
+  utils.arrayReplaceAt;
+  utils.isSpace;
+  utils.isWhiteSpace;
+  utils.isMdAsciiPunct;
+  utils.isPunctChar;
+  utils.escapeRE;
+  utils.normalizeReference;
 
   // Parse link label
 
