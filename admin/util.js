@@ -1,7 +1,7 @@
 var previewUtil = (function (exports) {
   'use strict';
 
-  var helpers = {
+  var helpers$1 = {
     getNextHeadingLevel(currentLevel) {
       return parseInt(currentLevel, 10) + 1;
     },
@@ -169,7 +169,7 @@ var previewUtil = (function (exports) {
   var blk12 = "▒";
   var blk14 = "░";
   var blk34 = "▓";
-  var block = "█";
+  var block$1 = "█";
   var bne = "=⃥";
   var bnequiv = "≡⃥";
   var bNot = "⫭";
@@ -764,7 +764,7 @@ var previewUtil = (function (exports) {
   var ijlig = "ĳ";
   var Imacr = "Ī";
   var imacr = "ī";
-  var image = "ℑ";
+  var image$1 = "ℑ";
   var ImaginaryI = "ⅈ";
   var imagline = "ℐ";
   var imagpart = "ℑ";
@@ -1061,7 +1061,7 @@ var previewUtil = (function (exports) {
   var male = "♂";
   var malt = "✠";
   var maltese = "✠";
-  var map = "↦";
+  var map$1 = "↦";
   var mapsto = "↦";
   var mapstodown = "↧";
   var mapstoleft = "↤";
@@ -2159,7 +2159,7 @@ var previewUtil = (function (exports) {
   var zscr = "𝓏";
   var zwj = "‍";
   var zwnj = "‌";
-  var entities = {
+  var entities$1 = {
   	Aacute: Aacute,
   	aacute: aacute,
   	Abreve: Abreve,
@@ -2293,7 +2293,7 @@ var previewUtil = (function (exports) {
   	blk12: blk12,
   	blk14: blk14,
   	blk34: blk34,
-  	block: block,
+  	block: block$1,
   	bne: bne,
   	bnequiv: bnequiv,
   	bNot: bNot,
@@ -2888,7 +2888,7 @@ var previewUtil = (function (exports) {
   	ijlig: ijlig,
   	Imacr: Imacr,
   	imacr: imacr,
-  	image: image,
+  	image: image$1,
   	ImaginaryI: ImaginaryI,
   	imagline: imagline,
   	imagpart: imagpart,
@@ -3187,7 +3187,7 @@ var previewUtil = (function (exports) {
   	malt: malt,
   	maltese: maltese,
   	"Map": "⤅",
-  	map: map,
+  	map: map$1,
   	mapsto: mapsto,
   	mapstodown: mapstodown,
   	mapstoleft: mapstoleft,
@@ -4287,7 +4287,7 @@ var previewUtil = (function (exports) {
   	zwnj: zwnj
   };
 
-  var entities$1 = /*#__PURE__*/Object.freeze({
+  var entities$2 = /*#__PURE__*/Object.freeze({
     __proto__: null,
     Aacute: Aacute,
     aacute: aacute,
@@ -4422,7 +4422,7 @@ var previewUtil = (function (exports) {
     blk12: blk12,
     blk14: blk14,
     blk34: blk34,
-    block: block,
+    block: block$1,
     bne: bne,
     bnequiv: bnequiv,
     bNot: bNot,
@@ -5017,7 +5017,7 @@ var previewUtil = (function (exports) {
     ijlig: ijlig,
     Imacr: Imacr,
     imacr: imacr,
-    image: image,
+    image: image$1,
     ImaginaryI: ImaginaryI,
     imagline: imagline,
     imagpart: imagpart,
@@ -5314,7 +5314,7 @@ var previewUtil = (function (exports) {
     male: male,
     malt: malt,
     maltese: maltese,
-    map: map,
+    map: map$1,
     mapsto: mapsto,
     mapstodown: mapstodown,
     mapstoleft: mapstoleft,
@@ -6412,15 +6412,15 @@ var previewUtil = (function (exports) {
     zscr: zscr,
     zwj: zwj,
     zwnj: zwnj,
-    'default': entities
+    'default': entities$1
   });
 
-  var require$$0 = getCjsExportFromNamespace(entities$1);
+  var require$$0 = getCjsExportFromNamespace(entities$2);
 
   /*eslint quotes:0*/
-  var entities$2 = require$$0;
+  var entities = require$$0;
 
-  var regex=/[!-#%-\*,-\/:;\?@\[-\]_\{\}\xA1\xA7\xAB\xB6\xB7\xBB\xBF\u037E\u0387\u055A-\u055F\u0589\u058A\u05BE\u05C0\u05C3\u05C6\u05F3\u05F4\u0609\u060A\u060C\u060D\u061B\u061E\u061F\u066A-\u066D\u06D4\u0700-\u070D\u07F7-\u07F9\u0830-\u083E\u085E\u0964\u0965\u0970\u09FD\u0A76\u0AF0\u0C84\u0DF4\u0E4F\u0E5A\u0E5B\u0F04-\u0F12\u0F14\u0F3A-\u0F3D\u0F85\u0FD0-\u0FD4\u0FD9\u0FDA\u104A-\u104F\u10FB\u1360-\u1368\u1400\u166D\u166E\u169B\u169C\u16EB-\u16ED\u1735\u1736\u17D4-\u17D6\u17D8-\u17DA\u1800-\u180A\u1944\u1945\u1A1E\u1A1F\u1AA0-\u1AA6\u1AA8-\u1AAD\u1B5A-\u1B60\u1BFC-\u1BFF\u1C3B-\u1C3F\u1C7E\u1C7F\u1CC0-\u1CC7\u1CD3\u2010-\u2027\u2030-\u2043\u2045-\u2051\u2053-\u205E\u207D\u207E\u208D\u208E\u2308-\u230B\u2329\u232A\u2768-\u2775\u27C5\u27C6\u27E6-\u27EF\u2983-\u2998\u29D8-\u29DB\u29FC\u29FD\u2CF9-\u2CFC\u2CFE\u2CFF\u2D70\u2E00-\u2E2E\u2E30-\u2E4E\u3001-\u3003\u3008-\u3011\u3014-\u301F\u3030\u303D\u30A0\u30FB\uA4FE\uA4FF\uA60D-\uA60F\uA673\uA67E\uA6F2-\uA6F7\uA874-\uA877\uA8CE\uA8CF\uA8F8-\uA8FA\uA8FC\uA92E\uA92F\uA95F\uA9C1-\uA9CD\uA9DE\uA9DF\uAA5C-\uAA5F\uAADE\uAADF\uAAF0\uAAF1\uABEB\uFD3E\uFD3F\uFE10-\uFE19\uFE30-\uFE52\uFE54-\uFE61\uFE63\uFE68\uFE6A\uFE6B\uFF01-\uFF03\uFF05-\uFF0A\uFF0C-\uFF0F\uFF1A\uFF1B\uFF1F\uFF20\uFF3B-\uFF3D\uFF3F\uFF5B\uFF5D\uFF5F-\uFF65]|\uD800[\uDD00-\uDD02\uDF9F\uDFD0]|\uD801\uDD6F|\uD802[\uDC57\uDD1F\uDD3F\uDE50-\uDE58\uDE7F\uDEF0-\uDEF6\uDF39-\uDF3F\uDF99-\uDF9C]|\uD803[\uDF55-\uDF59]|\uD804[\uDC47-\uDC4D\uDCBB\uDCBC\uDCBE-\uDCC1\uDD40-\uDD43\uDD74\uDD75\uDDC5-\uDDC8\uDDCD\uDDDB\uDDDD-\uDDDF\uDE38-\uDE3D\uDEA9]|\uD805[\uDC4B-\uDC4F\uDC5B\uDC5D\uDCC6\uDDC1-\uDDD7\uDE41-\uDE43\uDE60-\uDE6C\uDF3C-\uDF3E]|\uD806[\uDC3B\uDE3F-\uDE46\uDE9A-\uDE9C\uDE9E-\uDEA2]|\uD807[\uDC41-\uDC45\uDC70\uDC71\uDEF7\uDEF8]|\uD809[\uDC70-\uDC74]|\uD81A[\uDE6E\uDE6F\uDEF5\uDF37-\uDF3B\uDF44]|\uD81B[\uDE97-\uDE9A]|\uD82F\uDC9F|\uD836[\uDE87-\uDE8B]|\uD83A[\uDD5E\uDD5F]/;
+  var regex$4=/[!-#%-\*,-\/:;\?@\[-\]_\{\}\xA1\xA7\xAB\xB6\xB7\xBB\xBF\u037E\u0387\u055A-\u055F\u0589\u058A\u05BE\u05C0\u05C3\u05C6\u05F3\u05F4\u0609\u060A\u060C\u060D\u061B\u061E\u061F\u066A-\u066D\u06D4\u0700-\u070D\u07F7-\u07F9\u0830-\u083E\u085E\u0964\u0965\u0970\u09FD\u0A76\u0AF0\u0C84\u0DF4\u0E4F\u0E5A\u0E5B\u0F04-\u0F12\u0F14\u0F3A-\u0F3D\u0F85\u0FD0-\u0FD4\u0FD9\u0FDA\u104A-\u104F\u10FB\u1360-\u1368\u1400\u166D\u166E\u169B\u169C\u16EB-\u16ED\u1735\u1736\u17D4-\u17D6\u17D8-\u17DA\u1800-\u180A\u1944\u1945\u1A1E\u1A1F\u1AA0-\u1AA6\u1AA8-\u1AAD\u1B5A-\u1B60\u1BFC-\u1BFF\u1C3B-\u1C3F\u1C7E\u1C7F\u1CC0-\u1CC7\u1CD3\u2010-\u2027\u2030-\u2043\u2045-\u2051\u2053-\u205E\u207D\u207E\u208D\u208E\u2308-\u230B\u2329\u232A\u2768-\u2775\u27C5\u27C6\u27E6-\u27EF\u2983-\u2998\u29D8-\u29DB\u29FC\u29FD\u2CF9-\u2CFC\u2CFE\u2CFF\u2D70\u2E00-\u2E2E\u2E30-\u2E4E\u3001-\u3003\u3008-\u3011\u3014-\u301F\u3030\u303D\u30A0\u30FB\uA4FE\uA4FF\uA60D-\uA60F\uA673\uA67E\uA6F2-\uA6F7\uA874-\uA877\uA8CE\uA8CF\uA8F8-\uA8FA\uA8FC\uA92E\uA92F\uA95F\uA9C1-\uA9CD\uA9DE\uA9DF\uAA5C-\uAA5F\uAADE\uAADF\uAAF0\uAAF1\uABEB\uFD3E\uFD3F\uFE10-\uFE19\uFE30-\uFE52\uFE54-\uFE61\uFE63\uFE68\uFE6A\uFE6B\uFF01-\uFF03\uFF05-\uFF0A\uFF0C-\uFF0F\uFF1A\uFF1B\uFF1F\uFF20\uFF3B-\uFF3D\uFF3F\uFF5B\uFF5D\uFF5F-\uFF65]|\uD800[\uDD00-\uDD02\uDF9F\uDFD0]|\uD801\uDD6F|\uD802[\uDC57\uDD1F\uDD3F\uDE50-\uDE58\uDE7F\uDEF0-\uDEF6\uDF39-\uDF3F\uDF99-\uDF9C]|\uD803[\uDF55-\uDF59]|\uD804[\uDC47-\uDC4D\uDCBB\uDCBC\uDCBE-\uDCC1\uDD40-\uDD43\uDD74\uDD75\uDDC5-\uDDC8\uDDCD\uDDDB\uDDDD-\uDDDF\uDE38-\uDE3D\uDEA9]|\uD805[\uDC4B-\uDC4F\uDC5B\uDC5D\uDCC6\uDDC1-\uDDD7\uDE41-\uDE43\uDE60-\uDE6C\uDF3C-\uDF3E]|\uD806[\uDC3B\uDE3F-\uDE46\uDE9A-\uDE9C\uDE9E-\uDEA2]|\uD807[\uDC41-\uDC45\uDC70\uDC71\uDEF7\uDEF8]|\uD809[\uDC70-\uDC74]|\uD81A[\uDE6E\uDE6F\uDEF5\uDF37-\uDF3B\uDF44]|\uD81B[\uDE97-\uDE9A]|\uD82F\uDC9F|\uD836[\uDE87-\uDE8B]|\uD83A[\uDD5E\uDD5F]/;
 
   var encodeCache = {};
 
@@ -6460,14 +6460,14 @@ var previewUtil = (function (exports) {
   //  - exclude      - list of characters to ignore (in addition to a-zA-Z0-9)
   //  - keepEscaped  - don't encode '%' in a correct escape sequence (default: true)
   //
-  function encode(string, exclude, keepEscaped) {
+  function encode$2(string, exclude, keepEscaped) {
     var i, l, code, nextCode, cache,
         result = '';
 
     if (typeof exclude !== 'string') {
       // encode(string, keepEscaped)
       keepEscaped  = exclude;
-      exclude = encode.defaultChars;
+      exclude = encode$2.defaultChars;
     }
 
     if (typeof keepEscaped === 'undefined') {
@@ -6511,11 +6511,11 @@ var previewUtil = (function (exports) {
     return result;
   }
 
-  encode.defaultChars   = ";/?:@&=+$,-_.!~*'()#";
-  encode.componentChars = "-_.!~*'()";
+  encode$2.defaultChars   = ";/?:@&=+$,-_.!~*'()#";
+  encode$2.componentChars = "-_.!~*'()";
 
 
-  var encode_1 = encode;
+  var encode_1 = encode$2;
 
   /* eslint-disable no-bitwise */
 
@@ -6543,11 +6543,11 @@ var previewUtil = (function (exports) {
 
   // Decode percent-encoded string.
   //
-  function decode(string, exclude) {
+  function decode$2(string, exclude) {
     var cache;
 
     if (typeof exclude !== 'string') {
-      exclude = decode.defaultChars;
+      exclude = decode$2.defaultChars;
     }
 
     cache = getDecodeCache(exclude);
@@ -6630,13 +6630,13 @@ var previewUtil = (function (exports) {
   }
 
 
-  decode.defaultChars   = ';/?:@&=+$,#';
-  decode.componentChars = '';
+  decode$2.defaultChars   = ';/?:@&=+$,#';
+  decode$2.componentChars = '';
 
 
-  var decode_1 = decode;
+  var decode_1 = decode$2;
 
-  var format = function format(url) {
+  var format$1 = function format(url) {
     var result = '';
 
     result += url.protocol || '';
@@ -6948,33 +6948,33 @@ var previewUtil = (function (exports) {
     if (host) { this.hostname = host; }
   };
 
-  var parse = urlParse;
+  var parse$1 = urlParse;
 
   var encode$1 = encode_1;
   var decode$1 = decode_1;
-  var format$1 = format;
-  var parse$1  = parse;
+  var format = format$1;
+  var parse  = parse$1;
 
   var mdurl = {
   	encode: encode$1,
   	decode: decode$1,
-  	format: format$1,
-  	parse: parse$1
+  	format: format,
+  	parse: parse
   };
 
-  var regex$1=/[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
+  var regex$3=/[\0-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF]/;
 
   var regex$2=/[\0-\x1F\x7F-\x9F]/;
 
-  var regex$3=/[\xAD\u0600-\u0605\u061C\u06DD\u070F\u08E2\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u206F\uFEFF\uFFF9-\uFFFB]|\uD804[\uDCBD\uDCCD]|\uD82F[\uDCA0-\uDCA3]|\uD834[\uDD73-\uDD7A]|\uDB40[\uDC01\uDC20-\uDC7F]/;
+  var regex$1=/[\xAD\u0600-\u0605\u061C\u06DD\u070F\u08E2\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u206F\uFEFF\uFFF9-\uFFFB]|\uD804[\uDCBD\uDCCD]|\uD82F[\uDCA0-\uDCA3]|\uD834[\uDD73-\uDD7A]|\uDB40[\uDC01\uDC20-\uDC7F]/;
 
-  var regex$4=/[ \xA0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]/;
+  var regex=/[ \xA0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000]/;
 
-  var Any = regex$1;
+  var Any = regex$3;
   var Cc  = regex$2;
-  var Cf  = regex$3;
-  var P   = regex;
-  var Z   = regex$4;
+  var Cf  = regex$1;
+  var P   = regex$4;
+  var Z   = regex;
 
   var uc_micro = {
   	Any: Any,
@@ -7066,8 +7066,8 @@ var previewUtil = (function (exports) {
   function replaceEntityPattern(match, name) {
     var code = 0;
 
-    if (has(entities$2, name)) {
-      return entities$2[name];
+    if (has(entities, name)) {
+      return entities[name];
     }
 
     if (name.charCodeAt(0) === 0x23/* # */ && DIGITAL_ENTITY_TEST_RE.test(name)) {
@@ -7170,7 +7170,7 @@ var previewUtil = (function (exports) {
 
   // Currently without astral characters support.
   function isPunctChar(ch) {
-    return regex.test(ch);
+    return regex$4.test(ch);
   }
 
 
@@ -7361,7 +7361,7 @@ var previewUtil = (function (exports) {
     return labelEnd;
   };
 
-  var unescapeAll = utils.unescapeAll;
+  var unescapeAll$2 = utils.unescapeAll;
 
 
   var parse_link_destination = function parseLinkDestination(str, pos, max) {
@@ -7382,7 +7382,7 @@ var previewUtil = (function (exports) {
         if (code === 0x0A /* \n */) { return result; }
         if (code === 0x3E /* > */) {
           result.pos = pos + 1;
-          result.str = unescapeAll(str.slice(start + 1, pos));
+          result.str = unescapeAll$2(str.slice(start + 1, pos));
           result.ok = true;
           return result;
         }
@@ -7429,7 +7429,7 @@ var previewUtil = (function (exports) {
     if (start === pos) { return result; }
     if (level !== 0) { return result; }
 
-    result.str = unescapeAll(str.slice(start, pos));
+    result.str = unescapeAll$2(str.slice(start, pos));
     result.lines = lines;
     result.pos = pos;
     result.ok = true;
@@ -7489,14 +7489,14 @@ var previewUtil = (function (exports) {
   var parseLinkDestination = parse_link_destination;
   var parseLinkTitle       = parse_link_title;
 
-  var helpers$1 = {
+  var helpers = {
   	parseLinkLabel: parseLinkLabel,
   	parseLinkDestination: parseLinkDestination,
   	parseLinkTitle: parseLinkTitle
   };
 
-  var assign          = utils.assign;
-  var unescapeAll$2     = utils.unescapeAll;
+  var assign$1          = utils.assign;
+  var unescapeAll     = utils.unescapeAll;
   var escapeHtml      = utils.escapeHtml;
 
 
@@ -7525,7 +7525,7 @@ var previewUtil = (function (exports) {
 
   default_rules.fence = function (tokens, idx, options, env, slf) {
     var token = tokens[idx],
-        info = token.info ? unescapeAll$2(token.info).trim() : '',
+        info = token.info ? unescapeAll(token.info).trim() : '',
         langName = '',
         highlighted, i, tmpAttrs, tmpToken;
 
@@ -7644,7 +7644,7 @@ var previewUtil = (function (exports) {
      * See [source code](https://github.com/markdown-it/markdown-it/blob/master/lib/renderer.js)
      * for more details and examples.
      **/
-    this.rules = assign({}, default_rules);
+    this.rules = assign$1({}, default_rules);
   }
 
 
@@ -8193,7 +8193,7 @@ var previewUtil = (function (exports) {
     state.src = str;
   };
 
-  var block$1 = function block(state) {
+  var block = function block(state) {
     var token;
 
     if (state.inlineMode) {
@@ -8443,9 +8443,9 @@ var previewUtil = (function (exports) {
     }
   };
 
-  var isWhiteSpace   = utils.isWhiteSpace;
-  var isPunctChar    = utils.isPunctChar;
-  var isMdAsciiPunct = utils.isMdAsciiPunct;
+  var isWhiteSpace$1   = utils.isWhiteSpace;
+  var isPunctChar$1    = utils.isPunctChar;
+  var isMdAsciiPunct$1 = utils.isMdAsciiPunct;
 
   var QUOTE_TEST_RE = /['"]/;
   var QUOTE_RE = /['"]/g;
@@ -8524,11 +8524,11 @@ var previewUtil = (function (exports) {
           }
         }
 
-        isLastPunctChar = isMdAsciiPunct(lastChar) || isPunctChar(String.fromCharCode(lastChar));
-        isNextPunctChar = isMdAsciiPunct(nextChar) || isPunctChar(String.fromCharCode(nextChar));
+        isLastPunctChar = isMdAsciiPunct$1(lastChar) || isPunctChar$1(String.fromCharCode(lastChar));
+        isNextPunctChar = isMdAsciiPunct$1(nextChar) || isPunctChar$1(String.fromCharCode(nextChar));
 
-        isLastWhiteSpace = isWhiteSpace(lastChar);
-        isNextWhiteSpace = isWhiteSpace(nextChar);
+        isLastWhiteSpace = isWhiteSpace$1(lastChar);
+        isNextWhiteSpace = isWhiteSpace$1(nextChar);
 
         if (isNextWhiteSpace) {
           canOpen = false;
@@ -8844,9 +8844,9 @@ var previewUtil = (function (exports) {
 
   var state_core = StateCore;
 
-  var _rules = [
+  var _rules$2 = [
     [ 'normalize',      normalize      ],
-    [ 'block',          block$1          ],
+    [ 'block',          block          ],
     [ 'inline',         inline         ],
     [ 'linkify',        linkify        ],
     [ 'replacements',   replacements   ],
@@ -8865,8 +8865,8 @@ var previewUtil = (function (exports) {
      **/
     this.ruler = new ruler();
 
-    for (var i = 0; i < _rules.length; i++) {
-      this.ruler.push(_rules[i][0], _rules[i][1]);
+    for (var i = 0; i < _rules$2.length; i++) {
+      this.ruler.push(_rules$2[i][0], _rules$2[i][1]);
     }
   }
 
@@ -8891,7 +8891,7 @@ var previewUtil = (function (exports) {
 
   var parser_core = Core;
 
-  var isSpace = utils.isSpace;
+  var isSpace$a = utils.isSpace;
 
 
   function getLine(state, line) {
@@ -8980,7 +8980,7 @@ var previewUtil = (function (exports) {
     while (pos < state.eMarks[nextLine]) {
       ch = state.src.charCodeAt(pos);
 
-      if (ch !== 0x7C/* | */ && ch !== 0x2D/* - */ && ch !== 0x3A/* : */ && !isSpace(ch)) { return false; }
+      if (ch !== 0x7C/* | */ && ch !== 0x2D/* - */ && ch !== 0x3A/* : */ && !isSpace$a(ch)) { return false; }
 
       pos++;
     }
@@ -9214,7 +9214,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$1 = utils.isSpace;
+  var isSpace$9 = utils.isSpace;
 
 
   var blockquote = function blockquote(state, startLine, endLine, silent) {
@@ -9290,7 +9290,7 @@ var previewUtil = (function (exports) {
     while (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (isSpace$1(ch)) {
+      if (isSpace$9(ch)) {
         if (ch === 0x09) {
           offset += 4 - (offset + state.bsCount[startLine] + (adjustTab ? 1 : 0)) % 4;
         } else {
@@ -9398,7 +9398,7 @@ var previewUtil = (function (exports) {
         while (pos < max) {
           ch = state.src.charCodeAt(pos);
 
-          if (isSpace$1(ch)) {
+          if (isSpace$9(ch)) {
             if (ch === 0x09) {
               offset += 4 - (offset + state.bsCount[nextLine] + (adjustTab ? 1 : 0)) % 4;
             } else {
@@ -9496,7 +9496,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$2 = utils.isSpace;
+  var isSpace$8 = utils.isSpace;
 
 
   var hr = function hr(state, startLine, endLine, silent) {
@@ -9521,7 +9521,7 @@ var previewUtil = (function (exports) {
     cnt = 1;
     while (pos < max) {
       ch = state.src.charCodeAt(pos++);
-      if (ch !== marker && !isSpace$2(ch)) { return false; }
+      if (ch !== marker && !isSpace$8(ch)) { return false; }
       if (ch === marker) { cnt++; }
     }
 
@@ -9538,7 +9538,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$3 = utils.isSpace;
+  var isSpace$7 = utils.isSpace;
 
 
   // Search `[-+*][\n ]`, returns next pos after marker on success
@@ -9560,7 +9560,7 @@ var previewUtil = (function (exports) {
     if (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (!isSpace$3(ch)) {
+      if (!isSpace$7(ch)) {
         // " -test " - is not a list item
         return -1;
       }
@@ -9611,7 +9611,7 @@ var previewUtil = (function (exports) {
     if (pos < max) {
       ch = state.src.charCodeAt(pos);
 
-      if (!isSpace$3(ch)) {
+      if (!isSpace$7(ch)) {
         // " 1.test " - is not a list item
         return -1;
       }
@@ -9895,8 +9895,8 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var normalizeReference   = utils.normalizeReference;
-  var isSpace$4              = utils.isSpace;
+  var normalizeReference$2   = utils.normalizeReference;
+  var isSpace$6              = utils.isSpace;
 
 
   var reference = function reference(state, startLine, _endLine, silent) {
@@ -9992,7 +9992,7 @@ var previewUtil = (function (exports) {
       ch = str.charCodeAt(pos);
       if (ch === 0x0A) {
         lines++;
-      } else if (isSpace$4(ch)) ; else {
+      } else if (isSpace$6(ch)) ; else {
         break;
       }
     }
@@ -10019,7 +10019,7 @@ var previewUtil = (function (exports) {
       ch = str.charCodeAt(pos);
       if (ch === 0x0A) {
         lines++;
-      } else if (isSpace$4(ch)) ; else {
+      } else if (isSpace$6(ch)) ; else {
         break;
       }
     }
@@ -10040,7 +10040,7 @@ var previewUtil = (function (exports) {
     // skip trailing spaces until the rest of the line
     while (pos < max) {
       ch = str.charCodeAt(pos);
-      if (!isSpace$4(ch)) { break; }
+      if (!isSpace$6(ch)) { break; }
       pos++;
     }
 
@@ -10053,7 +10053,7 @@ var previewUtil = (function (exports) {
         lines = destEndLineNo;
         while (pos < max) {
           ch = str.charCodeAt(pos);
-          if (!isSpace$4(ch)) { break; }
+          if (!isSpace$6(ch)) { break; }
           pos++;
         }
       }
@@ -10064,7 +10064,7 @@ var previewUtil = (function (exports) {
       return false;
     }
 
-    label = normalizeReference(str.slice(1, labelEnd));
+    label = normalizeReference$2(str.slice(1, labelEnd));
     if (!label) {
       // CommonMark 0.20 disallows empty labels
       return false;
@@ -10310,19 +10310,19 @@ var previewUtil = (function (exports) {
   var declaration = '<![A-Z]+\\s+[^>]*>';
   var cdata       = '<!\\[CDATA\\[[\\s\\S]*?\\]\\]>';
 
-  var HTML_TAG_RE = new RegExp('^(?:' + open_tag + '|' + close_tag + '|' + comment +
+  var HTML_TAG_RE$1 = new RegExp('^(?:' + open_tag + '|' + close_tag + '|' + comment +
                           '|' + processing + '|' + declaration + '|' + cdata + ')');
-  var HTML_OPEN_CLOSE_TAG_RE = new RegExp('^(?:' + open_tag + '|' + close_tag + ')');
+  var HTML_OPEN_CLOSE_TAG_RE$1 = new RegExp('^(?:' + open_tag + '|' + close_tag + ')');
 
-  var HTML_TAG_RE_1 = HTML_TAG_RE;
-  var HTML_OPEN_CLOSE_TAG_RE_1 = HTML_OPEN_CLOSE_TAG_RE;
+  var HTML_TAG_RE_1 = HTML_TAG_RE$1;
+  var HTML_OPEN_CLOSE_TAG_RE_1 = HTML_OPEN_CLOSE_TAG_RE$1;
 
   var html_re = {
   	HTML_TAG_RE: HTML_TAG_RE_1,
   	HTML_OPEN_CLOSE_TAG_RE: HTML_OPEN_CLOSE_TAG_RE_1
   };
 
-  var HTML_OPEN_CLOSE_TAG_RE$1 = html_re.HTML_OPEN_CLOSE_TAG_RE;
+  var HTML_OPEN_CLOSE_TAG_RE = html_re.HTML_OPEN_CLOSE_TAG_RE;
 
   // An array of opening and corresponding closing sequences for html tags,
   // last argument defines whether it can terminate a paragraph or not
@@ -10334,7 +10334,7 @@ var previewUtil = (function (exports) {
     [ /^<![A-Z]/,     />/,     true ],
     [ /^<!\[CDATA\[/, /\]\]>/, true ],
     [ new RegExp('^</?(' + html_blocks.join('|') + ')(?=(\\s|/?>|$))', 'i'), /^$/, true ],
-    [ new RegExp(HTML_OPEN_CLOSE_TAG_RE$1.source + '\\s*$'),  /^$/, false ]
+    [ new RegExp(HTML_OPEN_CLOSE_TAG_RE.source + '\\s*$'),  /^$/, false ]
   ];
 
 
@@ -10442,7 +10442,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$6 = utils.isSpace;
+  var isSpace$4 = utils.isSpace;
 
 
   function StateBlock(src, md, env, tokens) {
@@ -10505,7 +10505,7 @@ var previewUtil = (function (exports) {
       ch = s.charCodeAt(pos);
 
       if (!indent_found) {
-        if (isSpace$6(ch)) {
+        if (isSpace$4(ch)) {
           indent++;
 
           if (ch === 0x09) {
@@ -10577,7 +10577,7 @@ var previewUtil = (function (exports) {
 
     for (var max = this.src.length; pos < max; pos++) {
       ch = this.src.charCodeAt(pos);
-      if (!isSpace$6(ch)) { break; }
+      if (!isSpace$4(ch)) { break; }
     }
     return pos;
   };
@@ -10587,7 +10587,7 @@ var previewUtil = (function (exports) {
     if (pos <= min) { return pos; }
 
     while (pos > min) {
-      if (!isSpace$6(this.src.charCodeAt(--pos))) { return pos + 1; }
+      if (!isSpace$4(this.src.charCodeAt(--pos))) { return pos + 1; }
     }
     return pos;
   };
@@ -10635,7 +10635,7 @@ var previewUtil = (function (exports) {
       while (first < last && lineIndent < indent) {
         ch = this.src.charCodeAt(first);
 
-        if (isSpace$6(ch)) {
+        if (isSpace$4(ch)) {
           if (ch === 0x09) {
             lineIndent += 4 - (lineIndent + this.bsCount[line]) % 4;
           } else {
@@ -10838,7 +10838,7 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var isSpace$7 = utils.isSpace;
+  var isSpace$3 = utils.isSpace;
 
 
   var newline = function newline(state, silent) {
@@ -10871,13 +10871,13 @@ var previewUtil = (function (exports) {
     pos++;
 
     // skip heading spaces for next line
-    while (pos < max && isSpace$7(state.src.charCodeAt(pos))) { pos++; }
+    while (pos < max && isSpace$3(state.src.charCodeAt(pos))) { pos++; }
 
     state.pos = pos;
     return true;
   };
 
-  var isSpace$8 = utils.isSpace;
+  var isSpace$2 = utils.isSpace;
 
   var ESCAPED = [];
 
@@ -10912,7 +10912,7 @@ var previewUtil = (function (exports) {
         // skip leading whitespaces from next line
         while (pos < max) {
           ch = state.src.charCodeAt(pos);
-          if (!isSpace$8(ch)) { break; }
+          if (!isSpace$2(ch)) { break; }
           pos++;
         }
 
@@ -10973,7 +10973,7 @@ var previewUtil = (function (exports) {
 
   // Insert each marker as a separate text token, and add it to delimiter list
   //
-  var tokenize = function strikethrough(state, silent) {
+  var tokenize$1 = function strikethrough(state, silent) {
     var i, scanned, token, len, ch,
         start = state.pos,
         marker = state.src.charCodeAt(start);
@@ -11015,7 +11015,7 @@ var previewUtil = (function (exports) {
   };
 
 
-  function postProcess(state, delimiters) {
+  function postProcess$1(state, delimiters) {
     var i, j,
         startDelim,
         endDelim,
@@ -11084,23 +11084,23 @@ var previewUtil = (function (exports) {
 
   // Walk through delimiter list and replace text tokens with tags
   //
-  var postProcess_1 = function strikethrough(state) {
+  var postProcess_1$1 = function strikethrough(state) {
     var curr,
         tokens_meta = state.tokens_meta,
         max = state.tokens_meta.length;
 
-    postProcess(state, state.delimiters);
+    postProcess$1(state, state.delimiters);
 
     for (curr = 0; curr < max; curr++) {
       if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
-        postProcess(state, tokens_meta[curr].delimiters);
+        postProcess$1(state, tokens_meta[curr].delimiters);
       }
     }
   };
 
   var strikethrough = {
-  	tokenize: tokenize,
-  	postProcess: postProcess_1
+  	tokenize: tokenize$1,
+  	postProcess: postProcess_1$1
   };
 
   // Process *this* and _that_
@@ -11108,7 +11108,7 @@ var previewUtil = (function (exports) {
 
   // Insert each marker as a separate text token, and add it to delimiter list
   //
-  var tokenize$1 = function emphasis(state, silent) {
+  var tokenize = function emphasis(state, silent) {
     var i, scanned, token,
         start = state.pos,
         marker = state.src.charCodeAt(start);
@@ -11164,7 +11164,7 @@ var previewUtil = (function (exports) {
   };
 
 
-  function postProcess$1(state, delimiters) {
+  function postProcess(state, delimiters) {
     var i,
         startDelim,
         endDelim,
@@ -11225,27 +11225,27 @@ var previewUtil = (function (exports) {
 
   // Walk through delimiter list and replace text tokens with tags
   //
-  var postProcess_1$1 = function emphasis(state) {
+  var postProcess_1 = function emphasis(state) {
     var curr,
         tokens_meta = state.tokens_meta,
         max = state.tokens_meta.length;
 
-    postProcess$1(state, state.delimiters);
+    postProcess(state, state.delimiters);
 
     for (curr = 0; curr < max; curr++) {
       if (tokens_meta[curr] && tokens_meta[curr].delimiters) {
-        postProcess$1(state, tokens_meta[curr].delimiters);
+        postProcess(state, tokens_meta[curr].delimiters);
       }
     }
   };
 
   var emphasis = {
-  	tokenize: tokenize$1,
-  	postProcess: postProcess_1$1
+  	tokenize: tokenize,
+  	postProcess: postProcess_1
   };
 
   var normalizeReference$1   = utils.normalizeReference;
-  var isSpace$9              = utils.isSpace;
+  var isSpace$1              = utils.isSpace;
 
 
   var link = function link(state, silent) {
@@ -11287,7 +11287,7 @@ var previewUtil = (function (exports) {
       pos++;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$9(code) && code !== 0x0A) { break; }
+        if (!isSpace$1(code) && code !== 0x0A) { break; }
       }
       if (pos >= max) { return false; }
 
@@ -11309,7 +11309,7 @@ var previewUtil = (function (exports) {
       start = pos;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$9(code) && code !== 0x0A) { break; }
+        if (!isSpace$1(code) && code !== 0x0A) { break; }
       }
 
       // [link](  <href>  "title"  )
@@ -11323,7 +11323,7 @@ var previewUtil = (function (exports) {
         //                         ^^ skipping these spaces
         for (; pos < max; pos++) {
           code = state.src.charCodeAt(pos);
-          if (!isSpace$9(code) && code !== 0x0A) { break; }
+          if (!isSpace$1(code) && code !== 0x0A) { break; }
         }
       } else {
         title = '';
@@ -11391,11 +11391,11 @@ var previewUtil = (function (exports) {
     return true;
   };
 
-  var normalizeReference$2   = utils.normalizeReference;
-  var isSpace$a              = utils.isSpace;
+  var normalizeReference   = utils.normalizeReference;
+  var isSpace              = utils.isSpace;
 
 
-  var image$1 = function image(state, silent) {
+  var image = function image(state, silent) {
     var attrs,
         code,
         content,
@@ -11433,7 +11433,7 @@ var previewUtil = (function (exports) {
       pos++;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$a(code) && code !== 0x0A) { break; }
+        if (!isSpace(code) && code !== 0x0A) { break; }
       }
       if (pos >= max) { return false; }
 
@@ -11455,7 +11455,7 @@ var previewUtil = (function (exports) {
       start = pos;
       for (; pos < max; pos++) {
         code = state.src.charCodeAt(pos);
-        if (!isSpace$a(code) && code !== 0x0A) { break; }
+        if (!isSpace(code) && code !== 0x0A) { break; }
       }
 
       // [link](  <href>  "title"  )
@@ -11469,7 +11469,7 @@ var previewUtil = (function (exports) {
         //                         ^^ skipping these spaces
         for (; pos < max; pos++) {
           code = state.src.charCodeAt(pos);
-          if (!isSpace$a(code) && code !== 0x0A) { break; }
+          if (!isSpace(code) && code !== 0x0A) { break; }
         }
       } else {
         title = '';
@@ -11502,7 +11502,7 @@ var previewUtil = (function (exports) {
       // (collapsed reference link and shortcut reference link respectively)
       if (!label) { label = state.src.slice(labelStart, labelEnd); }
 
-      ref = state.env.references[normalizeReference$2(label)];
+      ref = state.env.references[normalizeReference(label)];
       if (!ref) {
         state.pos = oldPos;
         return false;
@@ -11611,7 +11611,7 @@ var previewUtil = (function (exports) {
     return false;
   };
 
-  var HTML_TAG_RE$1 = html_re.HTML_TAG_RE;
+  var HTML_TAG_RE = html_re.HTML_TAG_RE;
 
 
   function isLetter(ch) {
@@ -11643,7 +11643,7 @@ var previewUtil = (function (exports) {
       return false;
     }
 
-    match = state.src.slice(pos).match(HTML_TAG_RE$1);
+    match = state.src.slice(pos).match(HTML_TAG_RE);
     if (!match) { return false; }
 
     if (!silent) {
@@ -11684,8 +11684,8 @@ var previewUtil = (function (exports) {
       } else {
         match = state.src.slice(pos).match(NAMED_RE);
         if (match) {
-          if (has(entities$2, match[1])) {
-            if (!silent) { state.pending += entities$2[match[1]]; }
+          if (has(entities, match[1])) {
+            if (!silent) { state.pending += entities[match[1]]; }
             state.pos += match[0].length;
             return true;
           }
@@ -11839,9 +11839,9 @@ var previewUtil = (function (exports) {
     }
   };
 
-  var isWhiteSpace$1   = utils.isWhiteSpace;
-  var isPunctChar$1    = utils.isPunctChar;
-  var isMdAsciiPunct$1 = utils.isMdAsciiPunct;
+  var isWhiteSpace   = utils.isWhiteSpace;
+  var isPunctChar    = utils.isPunctChar;
+  var isMdAsciiPunct = utils.isMdAsciiPunct;
 
 
   function StateInline(src, md, env, outTokens) {
@@ -11940,11 +11940,11 @@ var previewUtil = (function (exports) {
     // treat end of the line as a whitespace
     nextChar = pos < max ? this.src.charCodeAt(pos) : 0x20;
 
-    isLastPunctChar = isMdAsciiPunct$1(lastChar) || isPunctChar$1(String.fromCharCode(lastChar));
-    isNextPunctChar = isMdAsciiPunct$1(nextChar) || isPunctChar$1(String.fromCharCode(nextChar));
+    isLastPunctChar = isMdAsciiPunct(lastChar) || isPunctChar(String.fromCharCode(lastChar));
+    isNextPunctChar = isMdAsciiPunct(nextChar) || isPunctChar(String.fromCharCode(nextChar));
 
-    isLastWhiteSpace = isWhiteSpace$1(lastChar);
-    isNextWhiteSpace = isWhiteSpace$1(nextChar);
+    isLastWhiteSpace = isWhiteSpace(lastChar);
+    isNextWhiteSpace = isWhiteSpace(nextChar);
 
     if (isNextWhiteSpace) {
       left_flanking = false;
@@ -11987,7 +11987,7 @@ var previewUtil = (function (exports) {
   ////////////////////////////////////////////////////////////////////////////////
   // Parser rules
 
-  var _rules$2 = [
+  var _rules = [
     [ 'text',            text ],
     [ 'newline',         newline ],
     [ 'escape',          _escape ],
@@ -11995,7 +11995,7 @@ var previewUtil = (function (exports) {
     [ 'strikethrough',   strikethrough.tokenize ],
     [ 'emphasis',        emphasis.tokenize ],
     [ 'link',            link ],
-    [ 'image',           image$1 ],
+    [ 'image',           image ],
     [ 'autolink',        autolink ],
     [ 'html_inline',     html_inline ],
     [ 'entity',          entity ]
@@ -12022,8 +12022,8 @@ var previewUtil = (function (exports) {
      **/
     this.ruler = new ruler();
 
-    for (i = 0; i < _rules$2.length; i++) {
-      this.ruler.push(_rules$2[i][0], _rules$2[i][1]);
+    for (i = 0; i < _rules.length; i++) {
+      this.ruler.push(_rules[i][0], _rules[i][1]);
     }
 
     /**
@@ -12155,10 +12155,10 @@ var previewUtil = (function (exports) {
     var re = {};
 
     // Use direct extract instead of `regenerate` to reduse browserified size
-    re.src_Any = regex$1.source;
+    re.src_Any = regex$3.source;
     re.src_Cc  = regex$2.source;
-    re.src_Z   = regex$4.source;
-    re.src_P   = regex.source;
+    re.src_Z   = regex.source;
+    re.src_P   = regex$4.source;
 
     // \p{\Z\P\Cc\CF} (white spaces + control + format + punctuation)
     re.src_ZPCc = [ re.src_Z, re.src_P, re.src_Cc ].join('|');
@@ -12333,7 +12333,7 @@ var previewUtil = (function (exports) {
 
   // Merge objects
   //
-  function assign$1(obj /*from1, from2, from3, ...*/) {
+  function assign(obj /*from1, from2, from3, ...*/) {
     var sources = Array.prototype.slice.call(arguments, 1);
 
     sources.forEach(function (source) {
@@ -12703,7 +12703,7 @@ var previewUtil = (function (exports) {
       }
     }
 
-    this.__opts__           = assign$1({}, defaultOptions, options);
+    this.__opts__           = assign({}, defaultOptions, options);
 
     // Cache last tested result. Used to skip repeating steps on next `match` call.
     this.__index__          = -1;
@@ -12711,7 +12711,7 @@ var previewUtil = (function (exports) {
     this.__schema__         = '';
     this.__text_cache__     = '';
 
-    this.__schemas__        = assign$1({}, defaultSchemas, schemas);
+    this.__schemas__        = assign({}, defaultSchemas, schemas);
     this.__compiled__       = {};
 
     this.__tlds__           = tlds_default;
@@ -12744,7 +12744,7 @@ var previewUtil = (function (exports) {
    * Set recognition options for links without schema.
    **/
   LinkifyIt.prototype.set = function set(options) {
-    this.__opts__ = assign$1(this.__opts__, options);
+    this.__opts__ = assign(this.__opts__, options);
     return this;
   };
 
@@ -13015,7 +13015,7 @@ var previewUtil = (function (exports) {
    * item.
    * @returns {Array} A new array of values returned by the callback function.
    */
-  function map$1(array, fn) {
+  function map(array, fn) {
     var length = array.length;
     var result = [];
     while (length--) {
@@ -13046,7 +13046,7 @@ var previewUtil = (function (exports) {
     // Avoid `split(regex)` for IE8 compatibility. See #17.
     string = string.replace(regexSeparators, '\x2E');
     var labels = string.split('.');
-    var encoded = map$1(labels, fn).join('.');
+    var encoded = map(labels, fn).join('.');
     return result + encoded;
   }
 
@@ -13098,7 +13098,7 @@ var previewUtil = (function (exports) {
    * @returns {String} The new Unicode string (UCS-2).
    */
   function ucs2encode(array) {
-    return map$1(array, function(value) {
+    return map(array, function(value) {
       var output = '';
       if (value > 0xFFFF) {
         value -= 0x10000;
@@ -13171,7 +13171,7 @@ var previewUtil = (function (exports) {
    * @param {String} input The Punycode string of ASCII-only symbols.
    * @returns {String} The resulting string of Unicode symbols.
    */
-  function decode$2(input) {
+  function decode(input) {
     // Don't use UCS-2
     var output = [],
       inputLength = input.length,
@@ -13272,7 +13272,7 @@ var previewUtil = (function (exports) {
    * @param {String} input The string of Unicode symbols.
    * @returns {String} The resulting Punycode string of ASCII-only symbols.
    */
-  function encode$2(input) {
+  function encode(input) {
     var n,
       delta,
       handledCPCount,
@@ -13393,7 +13393,7 @@ var previewUtil = (function (exports) {
   function toUnicode(input) {
     return mapDomain(input, function(string) {
       return regexPunycode.test(string) ?
-        decode$2(string.slice(4).toLowerCase()) :
+        decode(string.slice(4).toLowerCase()) :
         string;
     });
   }
@@ -13412,7 +13412,7 @@ var previewUtil = (function (exports) {
   function toASCII(input) {
     return mapDomain(input, function(string) {
       return regexNonASCII.test(string) ?
-        'xn--' + encode$2(string) :
+        'xn--' + encode(string) :
         string;
     });
   }
@@ -13434,8 +13434,8 @@ var previewUtil = (function (exports) {
     ucs2: ucs2,
     toASCII: toASCII,
     toUnicode: toUnicode,
-    encode: encode$2,
-    decode: decode$2
+    encode: encode,
+    decode: decode
   };
 
   // markdown-it default options
@@ -13941,7 +13941,7 @@ var previewUtil = (function (exports) {
      * Link components parser functions, useful to write plugins. See details
      * [here](https://github.com/markdown-it/markdown-it/blob/master/lib/helpers).
      **/
-    this.helpers = utils.assign({}, helpers$1);
+    this.helpers = utils.assign({}, helpers);
 
 
     this.options = {};
@@ -14183,16 +14183,16 @@ var previewUtil = (function (exports) {
 
   var lib = MarkdownIt;
 
-  var markdownIt = lib;
+  var markdownIt$1 = lib;
 
-  const markdownIt$1 = markdownIt({
+  const markdownIt = markdownIt$1({
     html: true,
     breaks: true,
     linkify: true
   });
 
   var markdownFilter = function markdown(value) {
-    return markdownIt$1.render(value);
+    return markdownIt.render(value);
   };
 
   var w3DateFilter = function w3cDate(value) {
@@ -14202,7 +14202,7 @@ var previewUtil = (function (exports) {
   };
 
   exports.dateFilter = dateFilter;
-  exports.helpers = helpers;
+  exports.helpers = helpers$1;
   exports.markdownFilter = markdownFilter;
   exports.w3DateFilter = w3DateFilter;
 
